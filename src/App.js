@@ -4,6 +4,7 @@ import './App.css';
 import Blog from './Components/Pages/Blog/Blog';
 import Home from './Components/Pages/Home/Home';
 import Login from './Components/Pages/Login/Login';
+import Footer from './Components/Pages/Shared/Footer/Footer';
 import Navbar from './Components/Pages/Shared/Navbar/Navbar';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <Route path="/blog" element={<Blog/>}></Route>
       </Routes>
       
-      
+      <Footer></Footer>
     </div>
   );
 }
