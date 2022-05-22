@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from '../../assets/images/logo.svg';
-import background from '../../assets/images/bg.jpg';
-import google from '../../assets/images/google.svg';
-import video from '../../assets/videos/video.mp4';
+import logo from '../../../assets/images/logo.svg';
+import background from '../../../assets/images/bg.jpg';
+import google from '../../../assets/images/google.svg';
+import video from '../../../assets/videos/video.mp4';
 
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
         <div className="2xl:container h-screen m-auto">
         <div hidden className="fixed inset-0 w-7/12 lg:block">
             <span className="absolute left-6 bottom-6 text-sm">Video by MART PRODUCTION from <a href="https://www.pexels.com/" target="blank" title="Pexels">Pexels</a></span>
-            <video className="w-full h-full object-cover" loop autoPlay src={video} poster={background}></video>
+            <video className="w-full h-full object-cover" loop autoPlay src={video}></video>
         </div>
         <div hidden role="hidden" className="fixed inset-0 w-6/12 ml-auto bg-white bg-opacity-70 backdrop-blur-xl lg:block"></div>
         <div className="relative h-full ml-auto lg:w-6/12">
@@ -22,7 +22,7 @@ const Login = () => {
                     <p className="font-medium text-lg text-gray-600">Welcome to Computer Care ! Login first</p>
                 </div>
                 
-                <div className="mt-12 grid gap-6 sm:grid-cols-2">
+                <div className="mt-10 grid gap-6 sm:grid-cols-2">
                     <button className="py-3 px-6 rounded-xl bg-blue-50 hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200">
                         <div className="flex gap-4 justify-center">
                             <img src={google} className="w-5" alt=""/>
@@ -39,7 +39,7 @@ const Login = () => {
                     </button>
                 </div>
 
-                <div role="hidden" className="mt-12 border-t">
+                <div role="hidden" className="mt-10 border-t">
                     <span className="block w-max mx-auto -mt-3 px-4 text-center text-gray-500 bg-white">Or</span>
                 </div>
 
