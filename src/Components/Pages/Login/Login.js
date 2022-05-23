@@ -1,11 +1,79 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import logo from '../../../assets/images/logo.svg';
 import background from '../../../assets/images/bg.jpg';
 import google from '../../../assets/images/google.svg';
 import video from '../../../assets/videos/video.mp4';
+import auth from '../../../firebase.init';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import Loading from '../Shared/Loading/Loading';
 
 
 const Login = () => {
+    const [signInWithGoogle, user, error] = useSignInWithGoogle(auth);
+    const navigate= useNavigate();
+     // using useref hook 
+     const emailRef = useRef('');
+     const passwordRef = useRef('');
+     const location = useLocation();
+     let errorElement;
+
+    // Tracking path 
+      let from = location.state?.from?.pathname || "/";
+      const [
+          signInWithEmailAndPassword,
+          user1,
+          loading,
+          error1,
+      ] = useSignInWithEmailAndPassword(auth);
+
+      const [sendPasswordResetEmail,sending] =useSendPasswordResetEmail(auth);
+      if (loading || sending){
+          return <Loading></Loading>
+      }
+      if (user1) {
+          navigate(from, { replace: true });
+      }
+      if (user) {
+          navigate(from, { replace: true });
+      }
+      if (error1|| error) {
+          errorElement = <div>
+              <p className='text-danger'>Error: {error1?.message} {error?.message} </p>
+          </div>
+      }
+    // event handler 
+    const handleSubmit = async event =>{
+        event.preventDefault();
+        const email= emailRef.current.value;
+        const password= passwordRef.current.value;
+        await signInWithEmailAndPassword(email,password);
+        const {data} = await axios.post('https://secure-cliffs-70594.herokuapp.com/login', {email});
+        localStorage.setItem('accessToken', data.accessToken);
+        navigate(from, { replace: true });
+        
+    }
+
+    // Register form navigator 
+    
+    const navigateRegister =event =>{
+        navigate('/register');
+    }
+
+    // Password Reset option 
+
+    const resetPassword = async() =>{
+        const email =emailRef.current.value;
+        if(email){
+            await sendPasswordResetEmail(email);
+        toast('Email sent');
+        }else{
+            toast('Please enter email address.');
+        }
+        
+    }
     return (
         <div className="2xl:container h-screen m-auto">
         <div hidden className="fixed inset-0 w-7/12 lg:block">
@@ -26,7 +94,7 @@ const Login = () => {
                     <button className="py-3 px-6 rounded-xl bg-blue-50 hover:bg-blue-100 focus:bg-blue-100 active:bg-blue-200">
                         <div className="flex gap-4 justify-center">
                             <img src={google} className="w-5" alt=""/>
-                            <span className="block w-max font-medium tracking-wide text-sm text-blue-700">with  Google</span>
+                            <span onClick={() => signInWithGoogle()} className="block w-max font-medium tracking-wide text-sm text-blue-700">with  Google</span>
                         </div>
                     </button>
                     <button className="py-3 px-6 rounded-xl bg-gray-900 transition hover:bg-gray-800 active:bg-gray-600 focus:bg-gray-700">
@@ -43,10 +111,11 @@ const Login = () => {
                     <span className="block w-max mx-auto -mt-3 px-4 text-center text-gray-500 bg-white">Or</span>
                 </div>
 
-                <form action="" className="space-y-6 py-6">
+                <form onSubmit={handleSubmit} className="space-y-6 py-6">
                     <div>
                         <input 
                                 type="email" 
+                                ref={emailRef}
                                 placeholder="Your Email"
                                 className="w-full py-3 px-6 ring-1 ring-gray-300 rounded-xl placeholder-gray-600 bg-transparent transition disabled:ring-gray-200 disabled:bg-gray-100 disabled:placeholder-gray-400 invalid:ring-red-400 focus:invalid:outline-none"
                         />
@@ -55,12 +124,14 @@ const Login = () => {
                     <div className="flex flex-col items-end">
                         <input 
                                 type="password" 
+                                ref={passwordRef}
                                 placeholder="What's the secret word ?"
                                 className="w-full py-3 px-6 ring-1 ring-gray-300 rounded-xl placeholder-gray-600 bg-transparent transition disabled:ring-gray-200 disabled:bg-gray-100 disabled:placeholder-gray-400 invalid:ring-red-400 focus:invalid:outline-none"
                         />
                         <button type="reset" className="w-max p-3 -mr-3">
-                            <span className="text-sm tracking-wide text-blue-600">Forgot password ?</span>
+                            <span onClick={resetPassword} className="text-sm tracking-wide text-blue-600">Forgot password ?</span>
                         </button>
+                        {errorElement}
                     </div>
 
                     <div>
@@ -68,9 +139,10 @@ const Login = () => {
                             <span className="font-semibold text-white text-lg">Login</span>
                         </button>
                         <a href="#" type="reset" className="w-max p-3 -ml-3">
-                            <span className="text-sm tracking-wide text-blue-600">Create new account</span>
+                            <span onClick={ navigateRegister} className="text-sm tracking-wide text-blue-600">Create new account</span>
                         </a>
                     </div>
+                    
                 </form>
 
                 <div className="border-t pt-12">
