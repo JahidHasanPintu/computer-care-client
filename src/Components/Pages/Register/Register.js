@@ -66,19 +66,10 @@ const Register = () => {
 
     return (
         <div>
-             <div className="2xl:container h-screen m-auto">
-        <div hidden className="fixed inset-0 w-7/12 lg:block">
-            <span className="absolute left-6 bottom-6 text-sm">Video by MART PRODUCTION from <a href="https://www.pexels.com/" target="blank" title="Pexels">Pexels</a></span>
-            <video className="w-full h-full object-cover" loop autoPlay></video>
-        </div>
-        <div hidden role="hidden" className="fixed inset-0 w-6/12 ml-auto bg-white bg-opacity-70 backdrop-blur-xl lg:block"></div>
-        <div className="relative h-full ml-auto lg:w-6/12">
-            <div className="m-auto py-12 px-6 sm:p-20 xl:w-10/12">
+             <div className="m-auto py-12 px-6 sm:p-20 xl:w-6/12">
                 <div className="space-y-4">
-                    <a href="">
-                        <img src={logo} className="w-40" alt="tailus logo"/>
-                    </a>
-                    <p className="font-medium text-lg text-gray-600">Welcome to Computer Care ! Login first</p>
+                    
+                    <p className="font-medium text-lg text-gray-600">Welcome to Computer Care ! Please sign up </p>
                 </div>
                 
                 <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -99,7 +90,7 @@ const Register = () => {
                 </div>
 
                 <div role="hidden" className="mt-10 border-t">
-                    <span className="block w-max mx-auto -mt-3 px-4 text-center text-gray-500 bg-white">Or</span>
+                    <span className="block w-max mx-auto -mt-3 px-4 text-center text-gray-500 ">Or</span>
                 </div>
 
                 <form onSubmit={handleRegister} className="space-y-6 py-6">
@@ -124,15 +115,6 @@ const Register = () => {
                                 className="w-full py-3 px-6 ring-1 ring-gray-300 rounded-xl placeholder-gray-600 bg-transparent transition disabled:ring-gray-200 disabled:bg-gray-100 disabled:placeholder-gray-400 invalid:ring-red-400 focus:invalid:outline-none"
                         />
                     </div>
-                    
-                    <div>
-                        <input 
-                                type="email" 
-                                ref={emailRef}
-                                placeholder="Your Email"
-                                className="w-full py-3 px-6 ring-1 ring-gray-300 rounded-xl placeholder-gray-600 bg-transparent transition disabled:ring-gray-200 disabled:bg-gray-100 disabled:placeholder-gray-400 invalid:ring-red-400 focus:invalid:outline-none"
-                        />
-                    </div>
 
                     <div className="flex flex-col items-end">
                         <input 
@@ -146,7 +128,7 @@ const Register = () => {
 
                     <div>
                         <button className="w-full px-6 py-3 rounded-xl bg-sky-500 transition hover:bg-sky-600 focus:bg-sky-600 active:bg-sky-800">
-                            <span className="font-semibold text-white text-lg">Login</span>
+                            <span className="font-semibold text-white text-lg">Register</span>
                         </button>
                         <a href="#" type="reset" className="w-max p-3 -ml-3">
                             <span onClick={ navigateLogin} className="text-sm tracking-wide text-blue-600">Memeber Login</span>
@@ -162,8 +144,6 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
             
         </div>
     );
