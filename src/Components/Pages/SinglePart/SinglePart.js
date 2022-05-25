@@ -16,7 +16,7 @@ const SinglePart = (props) => {
             <h6 className='price-quan'>Price: ${price} <span>Quantity: {quantity}</span></h6>
             <p>{description.substr(0,250)}....</p>
             <div onClick={()=> navigateToUpdate(_id)} className="bg-buy-plan">
-                <span  className="title4">Update</span>
+                <span  className="title4">Purchase</span>
             </div>
             
         </div>

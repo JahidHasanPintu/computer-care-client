@@ -114,7 +114,37 @@ const Inventory = () => {
             <div className="card-wrapper">
                 <div className="card">
                 {/* card left side or image side  */}
-                <div className= "product-imgs">
+                
+                <div class="form-control">
+                <h2 className= "product-title">Order Form</h2>
+                    <label class="input-group input-group-sm mt-2">
+                        <span>Name</span>
+                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                    </label>
+                    <label class="input-group input-group-sm mt-2">
+                        <span>Email</span>
+                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                    </label>
+                    <label class="input-group input-group-sm mt-2">
+                        <span>Mobile</span>
+                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                    </label>
+                    <label class="input-group input-group-sm mt-2">
+                        <span>Address</span>
+                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                    </label>
+                    <label class="input-group input-group-sm mt-2 mb-3">
+                        <span>Quantity</span>
+                        <input type="number" placeholder="Type here" class="input input-bordered input-sm" />
+                    </label>
+                    <button class="btn btn-active">Complete Order</button>
+                    </div>
+                
+                {/* Card Right Side  */}
+                <div className= "product-content">
+                    <h2 className= "product-title">{name}</h2>
+                    {/* <a href = "#" className= "product-link">{supplier}</a> */}
+                    <div className= "product-imgs">
                 <div className= "img-display">
                     <div className= "img-showcase">
                     
@@ -124,26 +154,14 @@ const Inventory = () => {
                 </div>
                 
                 </div>
-                {/* Card Right Side  */}
-                <div className= "product-content">
-                    <h2 className= "product-title">{name}</h2>
-                    <a href = "#" className= "product-link">{supplier}</a>
-                    <div className= "product-rating">
-                        <i className= "fas fa-star"></i>
-                        <i className= "fas fa-star"></i>
-                        <i className= "fas fa-star"></i>
-                        <i className= "fas fa-star"></i>
-                        <i className= "fas fa-star-half-alt"></i>
-                        <span>{ratings}(21)</span>
-                    </div>
 
                     <div className= "product-price">
                         
-                        <p className= "quantity">Quantity: <span>{cars.quantity}</span>  Sold: <span>{cars.sold}</span></p>
+                        <p className= "quantity">Quantity: <span>{cars.quantity}</span>  Price: <span>${price}</span></p>
                         {
                             quantity1 <= 0 ? <p className='quantity'>Sold Out</p> : ''
                         }
-                        <p className= "new-price"> Price: <span> ${price}</span></p>
+                        
                         
                     </div>
 
@@ -154,30 +172,13 @@ const Inventory = () => {
                         
                     </div>
 
-                    <div className= "purchase-info">
+                    {/* <div className= "purchase-info">
                         <input type = "number" ref={quantityRef} placeholder='0'/>
                         <button type = "button" onClick={handleUpdateCars} className= "product-button">Restock </button>
                         <button type = "button" onClick={handleDeliveredCars} className= "product-button">Delivered</button>
-                    </div>
+                    </div> */}
 
-                    <div className= "social-links">
-                        <p>Share At: </p>
-                        <a href = "#">
-                        <i className= "fab fa-facebook-f"></i>
-                        </a>
-                        <a href = "#">
-                        <i className= "fab fa-twitter"></i>
-                        </a>
-                        <a href = "#">
-                        <i className= "fab fa-instagram"></i>
-                        </a>
-                        <a href = "#">
-                        <i className= "fab fa-whatsapp"></i>
-                        </a>
-                        <a href = "#">
-                        <i className= "fab fa-pinterest"></i>
-                        </a>
-                    </div>
+                
                 </div>
                 </div>
             </div>
