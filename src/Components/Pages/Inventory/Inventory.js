@@ -1,3 +1,4 @@
+import { isDisabled } from '@testing-library/user-event/dist/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useInventory from '../../../hooks/useInventory';
@@ -101,7 +102,19 @@ const Inventory = () => {
         })
     }
 
+    // Disabling quantity with condition 
+    const initialQuantity = 50;
+    const [buttonDisabled,setButtonDisabled]=useState(false);
+    function handleDisabled(event){
 
+        const newQuanValue=event.target.value;
+        if(newQuanValue>initialQuantity){
+            setButtonDisabled(false);
+        }else{
+            setButtonDisabled(true);
+        }
+
+    }
 
 
 
@@ -119,25 +132,25 @@ const Inventory = () => {
                 <h2 className= "product-title">Order Form</h2>
                     <label class="input-group input-group-sm mt-2">
                         <span>Name</span>
-                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                        <input type="text" placeholder="Type your name here" class="input input-bordered w-full input-sm" />
                     </label>
                     <label class="input-group input-group-sm mt-2">
                         <span>Email</span>
-                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                        <input type="text" placeholder="Type email here" class="input input-bordered w-full input-sm" />
                     </label>
                     <label class="input-group input-group-sm mt-2">
                         <span>Mobile</span>
-                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                        <input type="text" placeholder="Type your mobile number" class="input input-bordered w-full input-sm" />
                     </label>
                     <label class="input-group input-group-sm mt-2">
                         <span>Address</span>
-                        <input type="text" placeholder="Type here" class="input input-bordered input-sm" />
+                        <input type="text" placeholder="Type full address" class="input input-bordered w-full input-sm" />
                     </label>
                     <label class="input-group input-group-sm mt-2 mb-3">
                         <span>Quantity</span>
-                        <input type="number" placeholder="Type here" class="input input-bordered input-sm" />
+                        <input type="number" defaultValue={initialQuantity} onChange={handleDisabled} placeholder="Type here" class="input input-bordered w-full input-sm" />
                     </label>
-                    <button class="btn btn-active">Complete Order</button>
+                    <button class="btn btn-active" disabled={buttonDisabled}  >Complete Order</button>
                     </div>
                 
                 {/* Card Right Side  */}
