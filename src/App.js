@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Blog from './Components/Pages/Blog/Blog';
+import Dashboard from './Components/Pages/Dashboard/Dashboard';
 import Home from './Components/Pages/Home/Home';
 import Inventory from './Components/Pages/Inventory/Inventory';
 import Login from './Components/Pages/Login/Login';
@@ -25,6 +26,9 @@ function App() {
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/inventory/:inventoryID" element={
           <RequireAuth> <Inventory></Inventory> </RequireAuth>
+        }></Route>
+        <Route path="/dashboard" element={
+          <RequireAuth> <Dashboard></Dashboard> </RequireAuth>
         }></Route>
         <Route path="/inventory" element={<Inventory></Inventory> }></Route>
       </Routes>
