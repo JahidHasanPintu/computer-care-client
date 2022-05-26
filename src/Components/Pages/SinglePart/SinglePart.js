@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './SinglePart.css';
 
 const SinglePart = (props) => {
-    const {_id,name,quantity,img,description,price,supplier}=props.car;
+    const {_id,name,quantity,img,description,price,minimum}=props.car;
+    // console.log(props.car);
     const navigate = useNavigate();
     const navigateToUpdate = id =>{
         navigate(`/inventory/${id}`);
@@ -12,8 +13,8 @@ const SinglePart = (props) => {
         <div className='part '>
             <img src={img} alt="" />
             <h3>{name}</h3>
-            <h5>Brand: {supplier}</h5>
-            <h6 className='price-quan'>Price: ${price} <span>Quantity: {quantity}</span></h6>
+            <h5>Price: ${price}</h5>
+            <h6 className='price-quan'>Minimum Order:{minimum} <span>Quantity: {quantity}</span></h6>
             <p>{description.substr(0,250)}....</p>
             <div onClick={()=> navigateToUpdate(_id)} className="bg-buy-plan">
                 <span  className="title4">Purchase</span>

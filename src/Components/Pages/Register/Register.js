@@ -1,18 +1,15 @@
 import React, { useRef, useState } from 'react';
-import logo from '../../../assets/images/logo.svg';
-import background from '../../../assets/images/bg.jpg';
 import google from '../../../assets/images/google.svg';
-import video from '../../../assets/videos/video.mp4';
 import auth from '../../../firebase.init';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import Loading from '../Shared/Loading/Loading';
 
 const Register = () => {
 
-    const [signInWithGoogle, user1, error2] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, user1,gloaing, error2] = useSignInWithGoogle(auth);
     const [error1, setError1] = useState('');
     const nameRef = useRef('');
     const emailRef = useRef('');
@@ -28,7 +25,10 @@ const Register = () => {
         loading,
         sending,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-    if (loading || sending){
+
+    // Updating user name 
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    if (loading || sending || updating || gloaing){
         return <Loading></Loading>
     }
     if (user) {
@@ -44,10 +44,12 @@ const Register = () => {
         const name = nameRef.current.value;
         const email = emailRef.current.value;
         const password= passwordRef.current.value;      
-        await createUserWithEmailAndPassword(email, password);       
+        await createUserWithEmailAndPassword(email, password); 
+        await updateProfile({ displayName:name });   
         const {data} = await axios.post('https://secure-cliffs-70594.herokuapp.com/login', {email});
         localStorage.setItem('accessToken', data.accessToken);
         navigate(from, { replace: true });
+        window.location.reload();
 
 
         toast('verification email sent');
