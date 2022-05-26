@@ -6,7 +6,7 @@ Live Client site Link: https://computer-care-manufacturer.web.app/home
 Server Side Github link: https://github.com/programming-hero-web-course1/manufacturer-website-server-side-JahidHasanPintu
 
 Admin credential for testing
-user: admin@computercare.comp
+user: admin@gmail.com
 password: 123456
 
 ## To complete this whole project I used
