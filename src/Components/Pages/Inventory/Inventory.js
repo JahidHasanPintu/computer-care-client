@@ -5,10 +5,13 @@ import { toast } from 'react-toastify';
 import useInventory from '../../../hooks/useInventory';
 import Loading from '../Shared/Loading/Loading';
 import './Inventory.css';
+import auth from '../../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Inventory = () => {
     const {inventoryID}=useParams();
     const [loading, setLoading] = useState(false);
+    const [user, loading2] = useAuthState(auth);
     // Loadinf single car by id 
     const [cars,setCars] = useInventory(inventoryID);
     const [quantity1,setQuantity]=useState(1);
@@ -17,11 +20,20 @@ const Inventory = () => {
     const handleSubmit=event=>{
         event.preventDefault();
         const partsData= {
-             name:event.target.name.value,
-             email:event.target.email.value,
-             quantity:event.target.quantity.value,
-             mobile:event.target.mobile.value,
-             address:event.target.address.value,
+            //  name:event.target.name.value,
+            //  email:event.target.email.value,
+            //  quantity:event.target.quantity.value,
+            //  mobile:event.target.mobile.value,
+            //  address:event.target.address.value,
+
+            productId: cars._id,
+            product: cars.name,
+            customerName: user?.displayName,
+            customerEmail: user?.email,
+            adress: event.target.address.value,
+            phone: event.target.mobile.value,
+            pricePerUnit: cars.price,
+            orderQuantity: event.target.quantity.value
              
 
         }
