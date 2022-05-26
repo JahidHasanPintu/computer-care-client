@@ -128,7 +128,7 @@ const Inventory = () => {
                 <div className="card">
                 {/* card left side or image side  */}
                 
-                <div class="form-control">
+                <div class="form-control mt-2 mb-3 p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <h2 className= "product-title">Order Form</h2>
                     <label class="input-group input-group-sm mt-2">
                         <span>Name</span>
