@@ -1,10 +1,10 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"); */
 
-.card-wrapper {
+.inventorys-wrapper {
   max-width: 1100px;
   margin: 0 auto;
 }
-img {
+.inventorys img {
   width: 80%;
   display: block;
 }
@@ -147,12 +147,12 @@ img {
 }
 
 @media screen and (min-width: 992px) {
-  .card {
+  .inventorys {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1.5rem;
   }
-  .card-wrapper {
+  .inventorys-wrapper {
     height: 100%;
     display: flex;
     justify-content: center;

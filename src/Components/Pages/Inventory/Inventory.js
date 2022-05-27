@@ -15,7 +15,7 @@ const Inventory = () => {
     // Loadinf single car by id 
     const [cars,setCars] = useInventory(inventoryID);
     const [quantity1,setQuantity]=useState(1);
-    const {_id,name,img,description,price}=cars;
+    const {_id,name,img,description,price,minimum}=cars;
 //    Submiting form 
     const handleSubmit=event=>{
         event.preventDefault();
@@ -58,12 +58,12 @@ const Inventory = () => {
 
 
     // Disabling quantity with condition 
-    const initialQuantity = 50;
+    const initialQuantity =10;
     const [buttonDisabled,setButtonDisabled]=useState(false);
     function handleDisabled(event){
 
         const newQuanValue=event.target.value;
-        if(newQuanValue>initialQuantity){
+        if(newQuanValue>initialQuantity-1 ){
             setButtonDisabled(false);
         }else{
             setButtonDisabled(true);
@@ -79,9 +79,9 @@ const Inventory = () => {
             {
             loading ? <Loading></Loading> : <div>
             
-            <div className="card-wrapper">
-                <div className="card">
-                {/* card left side or image side  */}
+            <div className="inventorys-wrapper">
+                <div className="inventorys">
+                {/* inventorys left side or image side  */}
                 
                 <div class="form-control mt-2 mb-3 p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <h2 className= "product-title">Order Form</h2>
@@ -90,12 +90,12 @@ const Inventory = () => {
                         <form onSubmit={handleSubmit} className=' mb-3 p-6 max-w-sm bg-white dark:bg-gray-800 dark:border-gray-700'>
                     <div class="mb-6">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
-                        <input type="text" name="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter Profile Name" required=""/>
+                        <input type="text" value={user?.displayName} name="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter Profile Name" required=""/>
                     </div>
                     
                     <div class="mb-6">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                        <input type="email" name="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter email" required=""/>
+                        <input type="email" value={user?.email} name="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter email" required=""/>
                     </div>
                 
             
@@ -120,7 +120,7 @@ const Inventory = () => {
                 
                  </div>
                 
-                {/* Card Right Side  */}
+                {/* inventorys Right Side  */}
                 <div className= "product-content">
                     <h2 className= "product-title">{name}</h2>
                     
@@ -137,7 +137,7 @@ const Inventory = () => {
 
                     <div className= "product-price">
                         
-                        <p className= "quantity">Quantity: <span>{cars.quantity}</span>  Price: <span>${price}</span></p>
+                        <p className= "quantity">Quantity: <span>{cars.quantity}</span>  Minimum Order: <span>{cars.quantity}</span>  Price: <span>${price}</span></p>
                         {
                             quantity1 <= 0 ? <p className='quantity'>Sold Out</p> : ''
                         }

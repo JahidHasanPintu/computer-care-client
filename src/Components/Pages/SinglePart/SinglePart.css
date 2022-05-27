@@ -37,3 +37,8 @@ h3 {
 .price-quan span {
   margin-left: 160px;
 }
+
+.single-pic img {
+  height: 225px;
+  width: 400px;
+}

@@ -5,16 +5,18 @@ import { Link } from 'react-router-dom';
 import auth from '../../../../firebase.init';
 
 const Navbar = () => {
+    // Sign out process 
+    const [user] = useAuthState(auth);
   const menuItems = <>
         <li><Link to = "/home">Home</Link></li>
         <li><Link to = "/blog">Blog</Link></li>
-        <li><Link to = "/dashboard">Dashboard</Link></li>
+       
+        <li> {user?<Link to = "/dashboard">Dashboard</Link>:""} </li>
         <li><Link to = "/portfolio">Portfolio</Link></li>
         
   </>
 
-  // Sign out process 
-  const [user] = useAuthState(auth);
+
 
   const handleSignOut = () =>{
       signOut(auth);

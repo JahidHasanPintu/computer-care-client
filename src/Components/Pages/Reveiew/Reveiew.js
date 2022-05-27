@@ -3,17 +3,21 @@ import './Reveiew.css';
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import avatar from '../../../assets/images/avatar.png'
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import {Pagination } from "swiper";
+import useReview from '../../../hooks/useReview';
 
 const Reveiew = () => {
+    const [reviews] =useReview();
     return (
-        <div className='App slider-revews'>
+        <div className='slider-revews'>
             <>
+            <h4 className='mt-5 mb-5 text-center text-2xl brand'>All Reviews</h4>
       <Swiper
         slidesPerView={3}
         spaceBetween={30}
@@ -23,54 +27,28 @@ const Reveiew = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-            <div class="card card-compact w-96 bg-base-100 shadow-xl">
-                <figure className='bg-accent'>
-                    <div class="avatar p-3">
-                    <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src="https://api.lorem.space/image/face?hash=3174" />
+        {
+                reviews?.map(review=>
+                    <SwiperSlide>
+                        <div class="card card-compact w-96 bg-base-100 shadow-xl mb-10">
+                            <figure className='bg-accent'>
+                                <div class="avatar p-3">
+                                <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img src={avatar} alt='revew dp'/>
+                                </div>
+                                </div>
+                            </figure>
+                        <div class="card-body">
+                        <h2 class="card-title text-primary">{review.name} </h2>
+                        
+                        <p>{review.review}</p>
+                        <p className='text-secondary'>Ratings: {review.ratings} Star</p>
+                        
                     </div>
                     </div>
-                </figure>
-            <div class="card-body">
-            <h2 class="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            
-        </div>
-        </div>
-        </SwiperSlide>
-        <SwiperSlide>
-            <div class="card card-compact w-96 bg-base-100 shadow-xl">
-                <figure className='bg-accent'>
-                    <div class="avatar p-3">
-                    <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src="https://api.lorem.space/image/face?hash=3174" />
-                    </div>
-                    </div>
-                </figure>
-            <div class="card-body">
-            <h2 class="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            
-        </div>
-        </div>
-        </SwiperSlide>
-        <SwiperSlide>
-            <div class="card card-compact w-96 bg-base-100 shadow-xl">
-                <figure className='bg-accent'>
-                    <div class="avatar p-3">
-                    <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src="https://api.lorem.space/image/face?hash=3174" />
-                    </div>
-                    </div>
-                </figure>
-            <div class="card-body">
-            <h2 class="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            
-        </div>
-        </div>
-        </SwiperSlide>
+                    </SwiperSlide>                                                         
+                )
+            }
         
         
       </Swiper>

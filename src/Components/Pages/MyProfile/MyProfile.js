@@ -1,38 +1,84 @@
 import React from 'react';
-import './MyProfile.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
+import auth from '../../../firebase.init';
 
 const MyProfile = () => {
+    const [user] = useAuthState(auth)
+    const handleProfile = (e) => {
+        e.preventDefault()
+        const profile = {
+            name: user?.displayName,
+            email: user?.email,
+            education: e.target.education.value,
+            location: e.target.location.value,
+            phone: e.target.number.value,
+            linkedin: e.target.linkedin.value,
+        }
+        fetch(`https://computer-care.herokuapp.com/myprofile/${user?.email}`, {
+
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(profile)
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast('sucessfully updated');
+            })
+    }
     return (
         <div>
-            <form className='mt-2 mb-3 p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
-             <div class="mb-6">
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Profile Name</label>
-                <input type="text" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter Profile Name" required=""/>
-            </div>
-            
-            <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter email" required=""/>
-            </div>
-            <div class="mb-6">
-                <label for="education" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Education</label>
-                <input type="text" id="education" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter education" required=""/>
-            </div>
-            <div class="mb-6">
-                <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Location</label>
-                <input type="text" id="location" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter location" required=""/>
-            </div>
+            <h1>MyProfile</h1>
+            <form onSubmit={handleProfile}>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Name</span>
 
-            <div class="mb-6">
-                <label for="contact" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Contact number</label>
-                <input type="number" id="contact" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Enter contact number" required=""/>
-            </div>
-           
-            
+                    </label>
+                    <input value={user?.displayName} type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Email</span>
 
-           
-            <button type="submit" class=" mt-6 text-white bg-primary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update Profile</button>
-        </form>
+                    </label>
+                    <input value={user?.email} type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Education</span>
+
+                    </label>
+                    <input name='education' type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Location</span>
+
+                    </label>
+                    <input name='location' type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">PhoneNumber</span>
+
+                    </label>
+                    <input name='number' type="number" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Linkedin Link</span>
+
+                    </label>
+                    <input name='linkedin' type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                    <input className='btn w-full max-w-xs mt-4' type="submit" value='submit' />
+                </div>
+
+            </form>
         </div>
     );
 };

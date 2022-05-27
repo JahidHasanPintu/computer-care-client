@@ -3,8 +3,10 @@ import React from 'react';
 const Summary = () => {
     return (
         <div>
-            <h2 className='text-2xl'>Business Summary</h2>
-            <div class="stats shadow mb-3">
+            <h2 className='text-2xl text-center mt-10'>Business Summary</h2>
+        <div className="flex justify-center">
+            
+            <div class="mt-5 stats shadow mb-3">
   
                 <div class="stat place-items-center">
                     <div class="stat-title">Custmers</div>
@@ -37,6 +39,7 @@ const Summary = () => {
                 </div>
                 
                 </div>
+        </div>
         </div>
     );
 };
